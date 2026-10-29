@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行时数据：订阅目标、历史去重记录，属于使用者的私有数据，不入库
+# 插件首次运行会自动创建该目录（main.py 里 mkdir(parents=True, exist_ok=True)）
+data/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

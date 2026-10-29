@@ -1,0 +1,192 @@
+{
+  "keywords": {
+    "type": "list",
+    "description": "兴趣关键词池",
+    "hint": "「刷视频」和定时推送会从中随机挑一个去搜。填你真正会点开看的词。",
+    "default": [
+      "搞笑",
+      "猫",
+      "科技"
+    ]
+  },
+  "push_mode": {
+    "type": "string",
+    "description": "推送方式",
+    "hint": "interval = 隔一段时间推一次（用下面的「自动间隔」）；fixed = 定点推送，只在「推送时间点」里列的那几个时间推。",
+    "default": "interval",
+    "options": [
+      "interval",
+      "fixed"
+    ]
+  },
+  "push_times": {
+    "type": "list",
+    "description": "定点推送时间点",
+    "hint": "推送方式选 fixed 时生效。每行/每项一个时间，24 小时制，如 09:00、12:30、21:00。写几个就每天推几次。仍然受「推送时段」约束——时段外的时间点会被跳过。",
+    "default": []
+  },
+  "auto_interval_minutes": {
+    "type": "int",
+    "description": "自动推送间隔（分钟）",
+    "hint": "大于 0 才开启定时推送，单位分钟。",
+    "default": 120
+  },
+  "push_groups": {
+    "type": "list",
+    "default": [],
+    "description": "定时推送到哪些群",
+    "hint": "填群号就行，比如 123456789；也接受完整的会话标识。留空则只推给手动 /视频订阅开 过的会话。"
+  },
+  "push_hours": {
+    "type": "string",
+    "default": "",
+    "description": "只在哪个时段推",
+    "hint": "比如 9-23 或 09:00-23:30，跨午夜写 22-7。留空=全天都推。时段外只等不推，不会补发。"
+  },
+  "auto_subscribe": {
+    "type": "bool",
+    "default": false,
+    "description": "用过一次自动订阅（默认关）",
+    "hint": "关着的时候，只有 push_groups 里配的群和手动发过 /视频订阅开 的会话会收到。"
+  },
+  "max_duration_seconds": {
+    "type": "int",
+    "description": "视频时长上限（秒）",
+    "hint": "0 不限制。建议 180~600，太长的不适合推送。",
+    "default": 600
+  },
+  "min_play_count": {
+    "type": "int",
+    "description": "最低播放量过滤",
+    "hint": "0 不过滤。设 10000 可以滤掉没人看的视频。",
+    "default": 10000
+  },
+  "card_style": {
+    "type": "string",
+    "description": "分享样式",
+    "hint": "card=QQ 原生分享卡片（封面+标题+UP+播放量，点开跳 B 站）；image=封面图+文字；both=卡片和图都发。如果 QQ 提示「发送者版本过低，无法展示内容」，说明当前 QQ 客户端不渲染这种 JSON 卡片，把它改成 both 或 image。",
+    "default": "card",
+    "options": [
+      "card",
+      "image",
+      "both"
+    ]
+  },
+  "card_type": {
+    "type": "string",
+    "description": "卡片类型",
+    "hint": "structmsg=分享链接样式；miniapp=小程序卡片样式。两种都依赖 QQ 客户端渲染 JSON 卡片，哪个能显示就用哪个，都不行就改 card_style=image。",
+    "default": "structmsg",
+    "options": [
+      "structmsg",
+      "miniapp"
+    ]
+  },
+  "nl_trigger": {
+    "type": "bool",
+    "description": "允许自然语言触发",
+    "hint": "开启后不用打 /刷视频，直接 @机器人 说「刷几个有趣的视频发我看看」就会自己去刷。关掉则只能用斜杠命令。",
+    "default": true
+  },
+  "owner_qq": {
+    "type": "string",
+    "description": "你的 QQ 号（让机器人认主）",
+    "hint": "填了之后，每次模型回话前都会被告知「现在说话的是主人」还是「现在说话的是别人」。群里别人跟她说话，她会礼貌但有距离，也不会被忽悠着认别人当主人。留空则完全不注入。填你自己的 QQ 号，不要带空格。",
+    "default": ""
+  },
+  "owner_name": {
+    "type": "string",
+    "description": "她该怎么称呼你",
+    "hint": "配合 owner_qq 用。留空就用「主人」。填用户的昵称会自然很多。",
+    "default": ""
+  },
+  "allowed_qq": {
+    "type": "list",
+    "description": "谁能使唤这个插件（QQ 号）",
+    "hint": "留空 = 谁都可以。填了就只认这些人：别人 @ 机器人不会去刷视频，但机器人照样正常跟他聊天。填你自己的 QQ 号就能把插件变成私用。",
+    "default": []
+  },
+  "allowed_groups": {
+    "type": "list",
+    "description": "允许在哪些群里干活（群号）",
+    "hint": "留空 = 所有群都可以。填了就只有这些群能触发，私聊不受这条限制。加群时把不想要的群号写进来挡掉。",
+    "default": []
+  },
+  "comment_enabled": {
+    "type": "bool",
+    "description": "自动发观后感",
+    "hint": "推送视频后，过一会儿用当前人格再补一句观后感。需要 AstrBot 里配了可用的对话模型，没配就走内置口语句子。",
+    "default": true
+  },
+  "comment_delay_seconds": {
+    "type": "int",
+    "description": "观后感延迟（秒）",
+    "hint": "-1=按视频时长自适应（模拟真的看完，25~150 秒）；0=立刻发；其他值=固定等这么多秒。",
+    "default": -1
+  },
+  "comment_extra_prompt": {
+    "type": "string",
+    "description": "观后感补充要求",
+    "hint": "会拼进生成观后感的提示词里。比如「多用网络流行语」「别提播放量」「像在群里随手发一句」。留空则只用 AstrBot 当前人格。",
+    "default": ""
+  },
+  "comment_read_content": {
+    "type": "bool",
+    "description": "写观感之前先去把视频内容读一遍",
+    "hint": "打开后会先抓字幕，让观后感贴合视频实际内容，而不是只看标题瞎猜。抓不到字幕就退而用简介和热评，并告诉模型「别装懂」。需要填 cookie_sessdata，否则拿不到字幕。",
+    "default": true
+  },
+  "comment_max_chars": {
+    "type": "int",
+    "description": "最多喂多少字字幕给模型",
+    "hint": "字幕一般几千字，截断后只喂前这么多字。调大更准但更费 token。默认 2500。",
+    "default": 2500
+  },
+  "comment_retries": {
+    "type": "int",
+    "description": "抓字幕的重试次数",
+    "hint": "B 站 AI 字幕接口会串号（给回别的视频的字幕），插件靠「同一地址重复出现」来识别真的那份，所以要多试几次。默认 10，别调太小。",
+    "default": 10
+  },
+  "enable_video_file": {
+    "type": "bool",
+    "description": "下载并发送视频文件",
+    "hint": "开启需要容器内装有 yt-dlp 和 ffmpeg（apt install ffmpeg；uv tool install yt-dlp）。关闭时只发封面卡片，更稳。",
+    "default": false
+  },
+  "video_max_mb": {
+    "type": "int",
+    "description": "视频文件大小上限（MB）",
+    "hint": "超过上限直接放弃发送，避免 QQ 上传超时。",
+    "default": 15
+  },
+  "cookie_sessdata": {
+    "type": "string",
+    "description": "B 站 SESSDATA（可选）",
+    "hint": "被风控时填自己的 SESSDATA 能显著提高成功率。浏览器登录 B 站后从 Cookie 里复制 SESSDATA 的值。",
+    "default": ""
+  },
+  "bili_comment": {
+    "type": "bool",
+    "description": "顺便去 B 站发评论",
+    "hint": "开启后，看完视频发观后感的同时，把同一句话也发到那个视频的评论区。需要同时填好 cookie_sessdata 和 cookie_bili_jct，否则发不出去（只会记日志，不会报错打扰你）。注意这是发到你自己的 B 站账号下、别人看得见的公开评论。",
+    "default": false
+  },
+  "bili_comment_per_hour": {
+    "type": "int",
+    "description": "每小时最多发几条 B 站评论",
+    "hint": "防止手动连刷时在别人的视频底下刷屏、也降低被 B 站风控的概率。建议 3~10。",
+    "default": 5
+  },
+  "cookie_bili_jct": {
+    "type": "string",
+    "description": "B 站 bili_jct（发评论必需）",
+    "hint": "就是 B 站的 csrf token，登录后从 Cookie 里复制 bili_jct 的值（32 位十六进制，不带 % 转义）。只在开启 bili_comment 时才需要。",
+    "default": ""
+  },
+  "request_timeout": {
+    "type": "int",
+    "description": "请求超时（秒）",
+    "default": 15
+  }
+}

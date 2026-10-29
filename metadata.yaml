@@ -1,0 +1,6 @@
+name: astrbot_plugin_bili_scout
+display_name: B站视频侦察兵
+desc: 让 bot 主动刷 B 站，把视频卡片（封面+标题+链接）或视频文件转发到 QQ 私聊/群，并用人设补一句观后感（会先抓字幕读懂内容再写，不是只看标题）。支持定点/间隔两种定时推送和防打扰时段。
+version: 1.7.0
+author: dsh
+repo: https://github.com/dermcji/astrbot_plugin_bili_scout
