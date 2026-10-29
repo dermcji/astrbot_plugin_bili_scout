@@ -285,3 +285,9 @@ uv tool install yt-dlp        # 或者 pip install yt-dlp
 - 被风控时可以在配置里填 `cookie_sessdata`，成功率会明显上升。
 - QQ 视频消息对体积和时长敏感，`video_max_mb` 默认 15；超限会直接放弃发文件，只发卡片。
 - 推送记录保存在插件目录的 `data/history.json`（保留最近 600 条），订阅保存在 `data/subscriptions.json`。
+
+## 版本记录
+
+逐条变更见 [CHANGELOG.md](CHANGELOG.md)。
+
+- **1.7.0**：首个公开版本：随机刷片 + QQ 分享卡片、关键词找视频、定时订阅、可选视频下载、LLM 工具触发。
