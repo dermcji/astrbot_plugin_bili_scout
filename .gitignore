@@ -16,3 +16,27 @@ Thumbs.db
 .vscode/
 node_modules/
 node_modules.orig/
+
+# 个人信息 / 凭据：运行时才会出现，但绝不该进仓库
+# data/ 里保存的是使用者的私有数据（订阅的群号、已推视频记录、手动订阅的会话）
+*.log
+cookie*.json
+cookies.txt
+*sessdata*
+*bili_jct*
+.env
+.env.*
+
+# 本地数据库 / 缓存
+*.db
+*.sqlite
+*.sqlite3
+
+# 打包产物：zip 里可能夹带 data/
+*.zip
+*.tar.gz
+*.apk
+
+# 扫码登录图：等同于账号登录态
+*qr*.png
+qrcode*.png
